@@ -13,6 +13,7 @@ local plugins = {
         "rust-analyzer",
         "jdtls",
         "pyright",
+        "clangd"
       }
     }
   },
@@ -20,7 +21,7 @@ local plugins = {
     "yutkat/confirm-quit.nvim",
     event = "CmdlineEnter",
     opts = {},
-  }
+  },
 }
 
 return plugins
