@@ -1,31 +1,17 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local configs = require("plugins.configs.lspconfig")
+
+local on_attach = configs.on_attach
+local on_init = configs.on_init
+local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
+local servers = { "rust_analyzer", "jdtls", "clangd", "pyright", "tsserver"}
 
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = {"rust"},
-  root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-})
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_init = on_init,
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
 
-lspconfig.jdtls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = {"java"}
-})
-
-lspconfig.pyright.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern(".git"),
-  filetypes = {"py"}
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = {"c", "cpp", "objc", "objcpp"},
-  root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
-})

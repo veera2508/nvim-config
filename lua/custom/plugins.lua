@@ -13,7 +13,8 @@ local plugins = {
         "rust-analyzer",
         "jdtls",
         "pyright",
-        "clangd"
+        "clangd",
+        "typescript-language-server"
       }
     }
   },
