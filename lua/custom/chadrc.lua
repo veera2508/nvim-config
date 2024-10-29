@@ -1,7 +1,7 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = { theme = 'chadracula' }
+M.ui = { theme = 'tokyodark' }
 M.plugins = 'custom.plugins'
 M.ui.transparency = true
 
