@@ -1,5 +1,12 @@
 local plugins = {
   {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "custom.configs.null-ls"
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
@@ -14,7 +21,8 @@ local plugins = {
         "jdtls",
         "pyright",
         "clangd",
-        "typescript-language-server"
+        "typescript-language-server",
+        "clang-format"
       }
     }
   },

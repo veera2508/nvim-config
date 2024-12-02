@@ -5,7 +5,7 @@ local on_init = configs.on_init
 local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "rust_analyzer", "jdtls", "clangd", "pyright", "tsserver"}
+local servers = { "rust_analyzer", "jdtls", "pyright", "tsserver"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -14,4 +14,13 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+lspconfig.clangd.setup {
+  on_init = on_init,
+  on_attach = function(client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities
+}
 
